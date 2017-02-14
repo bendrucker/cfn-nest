@@ -1,5 +1,7 @@
 # cfn-nest [![Build Status](https://travis-ci.org/bendrucker/cfn-nest.svg?branch=master)](https://travis-ci.org/bendrucker/cfn-nest)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/bendrucker/cfn-nest.svg)](https://greenkeeper.io/)
+
 > Transform relative stack paths in a CloudFormation template into full S3 URLs
 
 
