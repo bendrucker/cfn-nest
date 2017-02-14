@@ -1,0 +1,16 @@
+{
+  "Resources": {
+    "Stack": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "Template": "nested.yml",
+        "Parameters": {
+          "Foo": {
+            "Description": "Nested",
+            "Type": "String"
+          }
+        }
+      }
+    }
+  }
+}
