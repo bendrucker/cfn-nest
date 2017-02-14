@@ -1,6 +1,9 @@
 {
   "name": "cfn-nest",
   "main": "index.js",
+  "bin": {
+    "cfn-nest": "./cli.js"
+  },
   "version": "0.0.0",
   "description": "Transform relative stack paths in a CloudFormation template into full S3 URLs",
   "license": "MIT",
