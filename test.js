@@ -7,7 +7,7 @@ var spawn = require('child_process').spawn
 var fs = require('fs')
 var path = require('path')
 var read = require('read-all-stream')
-var schema = require('cloudformation-js-yaml-schema').CLOUDFORMATION_SCHEMA
+var schema = require('js-yaml-schema-cfn')
 var yaml = require('js-yaml')
 
 var cli = path.resolve(__dirname, 'cli.js')
