@@ -5,6 +5,4 @@ Resources:
     Properties:
       Template: nested.yml
       Parameters:
-        Foo:
-          Description: Nested stack param
-          Type: String
+        Foo: !Sub ${Bar}

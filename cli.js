@@ -5,7 +5,8 @@
 var meow = require('meow')
 var JSONStream = require('JSONStream')
 var Transform = require('stream').Transform
-var yaml = require('yaml-js')
+var yaml = require('js-yaml')
+var schema = require('cloudformation-js-yaml-schema').CLOUDFORMATION_SCHEMA
 var CfnNest = require('./')
 
 var cli = meow(`
@@ -34,7 +35,7 @@ function YamlParse () {
   return new Transform({
     objectMode: true,
     transform: function (chunk, enc, callback) {
-      callback(null, yaml.load(chunk))
+      callback(null, yaml.load(chunk, {schema}))
     }
   })
 }
@@ -43,7 +44,7 @@ function YamlStringify () {
   return new Transform({
     objectMode: true,
     transform: function (chunk, enc, callback) {
-      callback(null, yaml.dump(chunk))
+      callback(null, yaml.dump(chunk, {schema}))
     }
   })
 }
