@@ -7,7 +7,8 @@ var spawn = require('child_process').spawn
 var fs = require('fs')
 var path = require('path')
 var read = require('read-all-stream')
-var yaml = require('yaml-js')
+var schema = require('cloudformation-js-yaml-schema').CLOUDFORMATION_SCHEMA
+var yaml = require('js-yaml')
 
 var cli = path.resolve(__dirname, 'cli.js')
 
@@ -30,7 +31,7 @@ test('yaml', function (t) {
 
   read(nest.stdout, function (err, data) {
     if (err) return t.end(err)
-    data = yaml.load(data)
+    data = yaml.load(data, {schema})
 
     t.ok(data.Resources, 'has resources')
     var Stack = data.Resources.Stack
