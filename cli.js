@@ -6,7 +6,7 @@ var meow = require('meow')
 var JSONStream = require('JSONStream')
 var Transform = require('stream').Transform
 var yaml = require('js-yaml')
-var schema = require('cloudformation-js-yaml-schema').CLOUDFORMATION_SCHEMA
+var schema = require('js-yaml-schema-cfn')
 var CfnNest = require('./')
 
 var cli = meow(`
