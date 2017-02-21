@@ -3,6 +3,9 @@
 'use strict'
 
 var meow = require('meow')
+var assert = require('assert')
+var path = require('path')
+var fs = require('fs')
 var JSONStream = require('JSONStream')
 var Transform = require('stream').Transform
 var yaml = require('js-yaml')
@@ -11,20 +14,32 @@ var CfnNest = require('./')
 
 var cli = meow(`
   Usage
-    $ cat template.yml | cfn-nest --bucket my-templates
+    $ cfn-nest <template> --bucket <bucket>
 
   Options
     --bucket The S3 bucket where nested stacks will be uploaded (required)
     --prefix A prefix that will be appended to the S3 key
+
+  Example
+    $ cfn-test web-server.yml --bucket my-templates
 `)
 
-var json = !cli.flags.yaml
+var template = cli.input[0]
+var extension = path.extname(template)
+
+assert(extension === '.json' || extension === '.yml', 'template must be json or yaml')
+
+var json = extension === '.json'
 var Parse = json ? JSONStream.parse : YamlParse
 var Stringify = json ? JSONStringify : YamlStringify
 
-process.stdin
+fs.createReadStream(template)
   .pipe(Parse())
-  .pipe(CfnNest(cli.flags))
+  .pipe(CfnNest(Object.assign(cli.flags, {
+    cwd: path.dirname(
+      path.resolve(process.cwd(), template)
+    )
+  })))
   .on('upload', function (file) {
     console.error(`${file.local} => ${file.s3}`)
   })

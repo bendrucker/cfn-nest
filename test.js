@@ -4,15 +4,12 @@
 
 var test = require('tape')
 var spawn = require('child_process').spawn
-var fs = require('fs')
 var path = require('path')
 var read = require('read-all-stream')
 var schema = require('js-yaml-schema-cfn')
 var yaml = require('js-yaml')
 
 var cli = path.resolve(__dirname, 'cli.js')
-
-process.chdir(path.resolve(__dirname, 'fixture'))
 
 var pattern = /https:\/\/s3\.amazonaws\.com\/cfn-nest\/nested-[a-z0-9]+\.template/
 
@@ -21,13 +18,10 @@ test('yaml', function (t) {
 
   var nest = spawn('node', [
     cli,
-    '--yaml',
+    './fixture/base.yml',
     '--bucket',
     'cfn-nest'
   ])
-
-  fs.createReadStream('./base.yml')
-    .pipe(nest.stdin)
 
   read(nest.stdout, function (err, data) {
     if (err) return t.end(err)
@@ -53,12 +47,10 @@ test('json', function (t) {
 
   var nest = spawn('node', [
     cli,
+    './fixture/base.json',
     '--bucket',
     'cfn-nest'
   ])
-
-  fs.createReadStream('./base.json')
-    .pipe(nest.stdin)
 
   read(nest.stdout, function (err, data) {
     if (err) return t.end(err)
