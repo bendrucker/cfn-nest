@@ -32,5 +32,5 @@ cfnTemplate
   .on('upload', function (file) {
     console.error(`${file.local} => ${file.s3}`)
   })
-  .pipe(cfnTemplate.stringify(extension))
+  .pipe(cfnTemplate.Stringify(extension))
   .pipe(process.stdout)

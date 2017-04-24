@@ -10,7 +10,8 @@ var waterfall = require('run-waterfall')
 var partial = require('ap').partial
 var path = require('path')
 var hash = require('hasha')
-var fs = require('fs')
+var cfnTemplate = require('cfn-template-stream')
+var concat = require('concat-stream')
 var S3 = require('aws-sdk/clients/s3')
 
 var s3 = new S3()
@@ -53,11 +54,20 @@ CfnNest.prototype._transform = function _transform (chunk, enc, callback) {
 CfnNest.prototype.unstack = function unstack (stack, callback) {
   var source = path.resolve(this.options.cwd, stack.Properties.Template)
 
-  waterfall([
-    partial(createHash, source),
-    this.upload.bind(this),
-    partial(setUrl, stack)
-  ], callback)
+  cfnTemplate
+    .fromFile(source)
+    .pipe(CfnNest(Object.assign({}, this.options, {
+      cwd: path.dirname(source)
+    })))
+    .on('upload', this.emit.bind(this, 'upload'))
+    .pipe(cfnTemplate.Stringify(path.extname(source)))
+    .pipe(concat((template) => {
+      waterfall([
+        partial(createHash, source, template),
+        this.upload.bind(this),
+        partial(setUrl, stack)
+      ], callback)
+    }))
 }
 
 CfnNest.prototype.upload = function upload (hashed, callback) {
@@ -80,19 +90,15 @@ CfnNest.prototype.upload = function upload (hashed, callback) {
   })
 }
 
-function createHash (templatePath, callback) {
-  fs.readFile(templatePath, function (err, data) {
-    if (err) return callback(err)
+function createHash (templatePath, data, callback) {
+  var extension = path.extname(templatePath)
+  var name = path.basename(templatePath, extension)
+  var hashed = hash(data, {algorithm: 'md5'})
 
-    var extension = path.extname(templatePath)
-    var name = path.basename(templatePath, extension)
-    var hashed = hash(data, {algorithm: 'md5'})
-
-    callback(null, {
-      data,
-      filename: `${name}-${hashed}.template`,
-      original: templatePath
-    })
+  callback(null, {
+    data,
+    filename: `${name}-${hashed}.template`,
+    original: templatePath
   })
 }
 
