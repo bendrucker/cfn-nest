@@ -33,7 +33,9 @@ Given a pseudo-valid nested stack template:
 cfn-nest template.json --bucket my-templates
 ```
 
-Any nested templates will be uploaded to S3 as [required by CloudFormation](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-stack.html#cfn-cloudformation-stack-templateurl). The `Template` property will be replaced by a valid `TemplateURL`. This URL contains an MD5 hash of the file contents so different versions will always produce unique URLs.
+Any nested templates will be uploaded to S3 as [required by CloudFormation](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-stack.html#cfn-cloudformation-stack-templateurl). The `Template` property will be replaced by a valid `TemplateURL`. This URL contains an MD5 hash of the file contents so different versions will always produce unique URLs. Un-nesting is performed *recursively* so you can write templates that reference templates that reference other templates (and so on).
+
+The `Template` path is resolved *relative to the template source file*.
 
 ### API
 

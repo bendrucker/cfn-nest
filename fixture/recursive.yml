@@ -1,0 +1,8 @@
+---
+Resources:
+  Stack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      Template: base.yml
+      Parameters:
+        Foo: !Sub ${Bar}
