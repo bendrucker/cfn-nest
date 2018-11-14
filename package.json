@@ -26,7 +26,7 @@
   ],
   "devDependencies": {
     "read-all-stream": "~3.1.0",
-    "standard": "^8.0.0",
+    "standard": "^12.0.1",
     "tape": "^4.0.0"
   },
   "files": [
@@ -34,13 +34,13 @@
   ],
   "dependencies": {
     "ap": "~0.2.0",
-    "aws-sdk": "~2.12.0",
+    "aws-sdk": "~2.355.0",
     "cfn-template-stream": "~1.0.0",
     "concat-stream": "~1.6.0",
     "filter-obj": "~1.1.0",
-    "hasha": "~2.2.0",
+    "hasha": "~3.0.0",
     "map-values": "~1.0.1",
-    "meow": "~3.7.0",
+    "meow": "~5.0.0",
     "run-parallel": "~1.1.6",
     "run-waterfall": "~1.1.3"
   }

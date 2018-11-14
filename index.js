@@ -25,7 +25,7 @@ function CfnNest (options) {
     return new CfnNest(options)
   }
 
-  Transform.call(this, {objectMode: true})
+  Transform.call(this, { objectMode: true })
 
   this.options = options || {}
   this.options.cwd = this.options.cwd || process.cwd()
@@ -93,7 +93,7 @@ CfnNest.prototype.upload = function upload (hashed, callback) {
 function createHash (templatePath, data, callback) {
   var extension = path.extname(templatePath)
   var name = path.basename(templatePath, extension)
-  var hashed = hash(data, {algorithm: 'md5'})
+  var hashed = hash(data, { algorithm: 'md5' })
 
   callback(null, {
     data,
