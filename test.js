@@ -25,7 +25,7 @@ test('yaml', function (t) {
 
   read(nest.stdout, function (err, data) {
     if (err) return t.end(err)
-    data = yaml.load(data, {schema})
+    data = yaml.load(data, { schema })
 
     t.ok(data.Resources, 'has resources')
     var Stack = data.Resources.Stack
@@ -83,7 +83,7 @@ test('recursive', function (t) {
 
   read(nest.stdout, function (err, data) {
     if (err) return t.end(err)
-    data = yaml.load(data, {schema})
+    data = yaml.load(data, { schema })
 
     t.ok(data.Resources, 'has resources')
     var Stack = data.Resources.Stack
