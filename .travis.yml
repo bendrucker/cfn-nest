@@ -1,6 +1,7 @@
 language: node_js
 node_js:
-- '6'
+- lts/*
+- node
 env:
   global:
   - AWS_ACCESS_KEY_ID=AKIAIO7CKKFMB34NLUUQ
