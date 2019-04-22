@@ -37,7 +37,7 @@
     "aws-sdk": "^2.355.0",
     "cfn-template-stream": "~1.0.0",
     "concat-stream": "~2.0.0",
-    "filter-obj": "~1.1.0",
+    "filter-obj": "~2.0.0",
     "hasha": "~5.0.0",
     "map-values": "~1.0.1",
     "meow": "~5.0.0",
