@@ -34,7 +34,7 @@
   ],
   "dependencies": {
     "ap": "~0.2.0",
-    "aws-sdk": "^2.355.0",
+    "aws-sdk": "^2.470.0",
     "cfn-template-stream": "~1.0.0",
     "concat-stream": "~2.0.0",
     "filter-obj": "~2.0.0",
