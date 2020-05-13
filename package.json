@@ -38,7 +38,7 @@
     "cfn-template-stream": "~1.0.0",
     "concat-stream": "~2.0.0",
     "filter-obj": "~2.0.0",
-    "hasha": "~5.0.0",
+    "hasha": "~5.2.0",
     "map-values": "~1.0.1",
     "meow": "~7.0.1",
     "run-parallel": "~1.1.6",
