@@ -40,7 +40,7 @@
     "filter-obj": "~2.0.0",
     "hasha": "~5.2.0",
     "map-values": "~1.0.1",
-    "meow": "~7.0.1",
+    "meow": "~7.1.0",
     "run-parallel": "~1.1.6",
     "run-waterfall": "~1.1.3"
   },
