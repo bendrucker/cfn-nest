@@ -26,7 +26,7 @@
   ],
   "devDependencies": {
     "read-all-stream": "~3.1.0",
-    "standard": "^15.0.0",
+    "standard": "^16.0.1",
     "tape": "^5.0.0"
   },
   "files": [
